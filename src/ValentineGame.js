@@ -207,13 +207,14 @@ export default function ValentineGame() {
   useEffect(()=>{const i=setInterval(()=>setFrame(f=>f+1),400);return()=>clearInterval(i);},[]);
 
   // Floating damage numbers decay
+  const hasFloats = floats.length > 0;
   useEffect(()=>{
-    if(floats.length===0)return;
+    if(!hasFloats)return;
     const i=setInterval(()=>{
       setFloats(prev=>prev.map(f=>({...f,y:f.y-1.5,life:f.life-0.03})).filter(f=>f.life>0));
     },30);
     return()=>clearInterval(i);
-  },[floats.length>0]);
+  },[hasFloats]);
 
   // Title canvas
   useEffect(()=>{
